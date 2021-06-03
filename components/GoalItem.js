@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-function GoalItem({ title }) {
+function GoalItem({ title, removeGoalHandler, itemData }) {
   return (
-    <TouchableOpacity onPress={() => console.log("sdadasd")}>
+    <TouchableOpacity onPress={() => removeGoalHandler(itemData)}>
       <View style={styles.listItem}>
         <Text>{title}</Text>
       </View>
