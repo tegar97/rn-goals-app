@@ -1,14 +1,30 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View, Button } from "react-native";
 
 export default function App() {
+  const [enteredGoal, setEnteredGoal] = useState("");
+  const [courseGoal, setCourseGoal] = useState([]);
+  const goalInputHandler = (text) => {
+    setEnteredGoal(text);
+  };
+
+  const addGoalHandler = () => {
+    setCourseGoal((currentGoals) => [...currentGoals, enteredGoal]);
+  };
   return (
     <View style={styles.screen}>
       <View style={styles.inputCointaner}>
-        <TextInput placeholder="Course Goal" style={styles.input} />
-        <Button title="Add" />
+        <TextInput
+          placeholder="Course Goal"
+          style={styles.input}
+          onChangeText={goalInputHandler}
+          value={enteredGoal}
+        />
+        <Button title="Add" onPress={addGoalHandler} />
       </View>
+
+      <View></View>
     </View>
 
     ///lern flexx
@@ -36,7 +52,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   input: {
-    width: "70%",
+    width: "80%",
     borderColor: "black",
     borderWidth: 1,
     padding: 10,
