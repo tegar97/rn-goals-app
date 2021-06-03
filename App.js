@@ -24,7 +24,11 @@ export default function App() {
         <Button title="Add" onPress={addGoalHandler} />
       </View>
 
-      <View></View>
+      <View>
+        {courseGoal.map((goal, index) => (
+          <Text key={index}>{goal}</Text>
+        ))}
+      </View>
     </View>
 
     ///lern flexx
