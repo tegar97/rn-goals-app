@@ -9,40 +9,25 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-
+import { GoalInput } from "./components/GoalInput";
+import GoalItem from "./components/GoalItem";
 export default function App() {
-  const [enteredGoal, setEnteredGoal] = useState("");
   const [courseGoal, setCourseGoal] = useState([]);
-  const goalInputHandler = (text) => {
-    setEnteredGoal(text);
-  };
 
-  const addGoalHandler = () => {
+  const addGoalHandler = (goalTitle) => {
     setCourseGoal((currentGoals) => [
       ...currentGoals,
-      { key: Math.random().toString, value: enteredGoal },
+      { key: Math.random().toString, value: goalTitle },
     ]);
   };
   return (
     <View style={styles.screen}>
-      <View style={styles.inputCointaner}>
-        <TextInput
-          placeholder="Course Goal"
-          style={styles.input}
-          onChangeText={goalInputHandler}
-          value={enteredGoal}
-        />
-        <Button title="Add" onPress={addGoalHandler} />
-      </View>
+      <GoalInput addGoalHandler={addGoalHandler} />
 
       <FlatList
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => item.id}
         data={courseGoal}
-        renderItem={(itemData) => (
-          <View style={styles.listItem}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
+        renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
       ></FlatList>
     </View>
 
@@ -64,23 +49,5 @@ export default function App() {
 const styles = StyleSheet.create({
   screen: {
     padding: 50,
-  },
-  inputCointaner: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignContent: "center",
-  },
-  input: {
-    width: "80%",
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 10,
-  },
-  listItem: {
-    padding: 10,
-    backgroundColor: "#ccc",
-    borderColor: "black",
-    borderWidth: 1,
-    marginVertical: 10,
   },
 });
