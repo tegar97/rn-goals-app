@@ -7,6 +7,7 @@ import {
   View,
   Button,
   ScrollView,
+  FlatList,
 } from "react-native";
 
 export default function App() {
@@ -17,32 +18,33 @@ export default function App() {
   };
 
   const addGoalHandler = () => {
-    setCourseGoal((currentGoals) => [...currentGoals, enteredGoal]);
+    setCourseGoal((currentGoals) => [
+      ...currentGoals,
+      { key: Math.random().toString, value: enteredGoal },
+    ]);
   };
   return (
-    <ScrollView>
-      <View style={styles.screen}>
-        <View style={styles.inputCointaner}>
-          <TextInput
-            placeholder="Course Goal"
-            style={styles.input}
-            onChangeText={goalInputHandler}
-            value={enteredGoal}
-          />
-          <Button title="Add" onPress={addGoalHandler} />
-        </View>
-
-        <View>
-          {courseGoal.map((goal, index) => (
-            <ScrollView>
-              <View style={styles.listItem}>
-                <Text key={index}>{goal}</Text>
-              </View>
-            </ScrollView>
-          ))}
-        </View>
+    <View style={styles.screen}>
+      <View style={styles.inputCointaner}>
+        <TextInput
+          placeholder="Course Goal"
+          style={styles.input}
+          onChangeText={goalInputHandler}
+          value={enteredGoal}
+        />
+        <Button title="Add" onPress={addGoalHandler} />
       </View>
-    </ScrollView>
+
+      <FlatList
+        keyExtractor={(item, index) => index}
+        data={courseGoal}
+        renderItem={(itemData) => (
+          <View style={styles.listItem}>
+            <Text>{itemData.item.value}</Text>
+          </View>
+        )}
+      ></FlatList>
+    </View>
 
     ///lern flexx
     // <View style={{padding: 50,width: '80%',height:300,flexDirection: 'row' ,alignItems: 'stretch',justifyContent: 'space-around'}}>
