@@ -20,6 +20,7 @@ export default function App() {
       { key: Math.random().toString, value: goalTitle },
     ]);
   };
+
   return (
     <View style={styles.screen}>
       <GoalInput addGoalHandler={addGoalHandler} />
