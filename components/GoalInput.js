@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
-export const GoalInput = ({ addGoalHandler }) => {
+import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
+export const GoalInput = ({ addGoalHandler, openModal }) => {
   const [enteredGoal, setEnteredGoal] = useState("");
   const goalInputHandler = (text) => {
     setEnteredGoal(text);
   };
 
   return (
-    <View style={styles.inputCointaner}>
-      <TextInput
-        placeholder="Course Goal"
-        style={styles.input}
-        onChangeText={goalInputHandler}
-        value={enteredGoal}
-      />
-      <Button title="Add" onPress={() => addGoalHandler(enteredGoal)} />
-    </View>
+    <Modal visible={openModal} animationType="slide">
+      <View style={styles.inputCointaner}>
+        <TextInput
+          placeholder="Course Goal"
+          style={styles.input}
+          onChangeText={goalInputHandler}
+          value={enteredGoal}
+        />
+        <Button title="Add" onPress={() => addGoalHandler(enteredGoal)} />
+      </View>
+    </Modal>
   );
 };
 
