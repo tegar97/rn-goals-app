@@ -23,14 +23,15 @@ export const GoalInput = ({ addGoalHandler, openModal }) => {
 
 const styles = StyleSheet.create({
   inputCointaner: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignContent: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
   },
   input: {
     width: "80%",
     borderColor: "black",
     borderWidth: 1,
     padding: 10,
+    marginVertical: 10,
   },
 });
