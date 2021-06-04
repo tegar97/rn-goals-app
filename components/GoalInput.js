@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
-export const GoalInput = ({ addGoalHandler, openModal }) => {
+export const GoalInput = ({ addGoalHandler, openModal, onCancel }) => {
   const [enteredGoal, setEnteredGoal] = useState("");
   const goalInputHandler = (text) => {
     setEnteredGoal(text);
+  };
+
+  const AddGoalHandler = (enteredGoal) => {
+    addGoalHandler(enteredGoal);
+    setEnteredGoal("");
   };
 
   return (
@@ -15,7 +20,14 @@ export const GoalInput = ({ addGoalHandler, openModal }) => {
           onChangeText={goalInputHandler}
           value={enteredGoal}
         />
-        <Button title="Add" onPress={() => addGoalHandler(enteredGoal)} />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Cancel" color="red" onPress={() => onCancel} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Add" onPress={() => AddGoalHandler(enteredGoal)} />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -33,5 +45,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     marginVertical: 10,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "60%",
+  },
+  button: {
+    width: "40%",
   },
 });
